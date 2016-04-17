@@ -29,7 +29,7 @@ var Note = React.createClass({
     renderForm: function() {
         return (
             <div className="note">
-            <textarea ref="newText" defaultValue={this.props.children} 
+            <textarea ref="newText" defaultValue={this.props.children}
             className="form-control"></textarea>
             <button onClick={this.save} className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
             </div>
@@ -56,22 +56,27 @@ var Board = React.createClass({
             }
         }
     },
+    getInitialState: function() {
+      return {notes: [
+        'call Bill',
+        'Email Lisa',
+        'Send Proposal',
+        'Make dentist appointment'
+        ]
+      };
+    },
 
     render: function() {
-        return <div className="board">{this.props.count}</div>
+        return (<div className="board">
+                {this.state.notes.map(function (note, i){
+                  return (
+                    <Note key={i}>{note}</Note>
+                  );
+                })}
+        </div>);
     }
 });
 
 
-React.render(<Board count={10}/>, 
+React.render(<Board count={10}/>,
     document.getElementById('react-container'));
-
-
-
-
-
-
-
-
-
-
